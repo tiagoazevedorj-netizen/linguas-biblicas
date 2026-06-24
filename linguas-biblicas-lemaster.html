@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Línguas Bíblicas — Pré-requisito DMin TMS</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal-900: #04342C;
+    --teal-700: #0F6E56;
+    --teal-500: #1D9E75;
+    --teal-200: #9FE1CB;
+    --teal-50:  #E1F5EE;
+    --purple-800: #3C3489;
+    --purple-500: #534AB7;
+    --purple-200: #AFA9EC;
+    --purple-50:  #EEEDFE;
+    --amber-800: #633806;
+    --amber-500: #BA7517;
+    --amber-200: #FAC775;
+    --amber-50:  #FAEEDA;
+    --gray-900: #2C2C2A;
+    --gray-700: #5F5E5A;
+    --gray-400: #888780;
+    --gray-100: #D3D1C7;
+    --gray-50:  #F1EFE8;
+    --white: #FFFFFF;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--gray-50);
+    color: var(--gray-900);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--teal-900);
+    padding: 64px 24px 56px;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal-200);
+    margin-bottom: 16px;
+  }
+  .hero-title {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 16px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--teal-200);
+  }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--teal-200);
+    max-width: 480px;
+    margin: 0 auto 36px;
+    opacity: 0.85;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'EB Garamond', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--teal-200);
+    margin-top: 4px;
+  }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── INTRO ── */
+  .intro-block {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 32px 36px;
+    margin: 40px auto;
+    max-width: 860px;
+    margin-left: 24px;
+    margin-right: 24px;
+    border: 1px solid var(--gray-100);
+  }
+  @media (min-width: 900px) {
+    .intro-block { margin-left: auto; margin-right: auto; }
+  }
+  .intro-block p {
+    font-size: 15px;
+    color: var(--gray-700);
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+  .intro-block p:last-child { margin-bottom: 0; }
+  .intro-block strong { color: var(--gray-900); font-weight: 500; }
+
+  /* ── PHASE SECTIONS ── */
+  .phase-section {
+    max-width: 860px;
+    margin: 0 auto 48px;
+    padding: 0 24px;
+  }
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .phase-badge {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .phase-1 .phase-badge { background: var(--teal-50); color: var(--teal-700); }
+  .phase-2 .phase-badge { background: var(--purple-50); color: var(--purple-800); }
+  .phase-3 .phase-badge { background: var(--amber-50); color: var(--amber-800); }
+
+  .phase-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--gray-900);
+  }
+  .phase-desc {
+    font-size: 14px;
+    color: var(--gray-400);
+    margin-bottom: 20px;
+    padding-left: 4px;
+  }
+
+  /* ── WEEK CARDS ── */
+  .weeks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .week-card {
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    user-select: none;
+  }
+  .week-card:hover {
+    border-color: var(--gray-400);
+  }
+  .week-card.active {
+    border-color: var(--teal-500);
+    box-shadow: 0 0 0 3px rgba(29,158,117,0.1);
+  }
+  .phase-2 .week-card.active {
+    border-color: var(--purple-500);
+    box-shadow: 0 0 0 3px rgba(83,74,183,0.1);
+  }
+  .phase-3 .week-card.active {
+    border-color: var(--amber-500);
+    box-shadow: 0 0 0 3px rgba(186,117,23,0.1);
+  }
+  .week-num {
+    font-size: 11px;
+    color: var(--gray-400);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  .week-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gray-900);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .week-lang {
+    font-size: 12px;
+    color: var(--gray-400);
+  }
+
+  /* ── DETAIL BOX ── */
+  .detail-box {
+    display: none;
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: var(--radius-lg);
+    padding: 28px 32px;
+    margin-top: 12px;
+  }
+  .detail-box.visible { display: block; }
+  .detail-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--gray-900);
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .day-row {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--gray-50);
+  }
+  .day-row:last-of-type { border-bottom: none; }
+  .day-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-400);
+    padding-top: 2px;
+  }
+  .day-content {
+    font-size: 14px;
+    color: var(--gray-700);
+    line-height: 1.65;
+  }
+  .day-content em {
+    color: var(--gray-400);
+    font-style: normal;
+    font-size: 13px;
+  }
+  .resources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--gray-100);
+  }
+  .resource-pill {
+    font-size: 12px;
+    background: var(--gray-50);
+    border: 1px solid var(--gray-100);
+    border-radius: 20px;
+    padding: 4px 12px;
+    color: var(--gray-700);
+  }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    max-width: 860px;
+    margin: 0 auto 40px;
+    padding: 0 24px;
+    border: none;
+    border-top: 1px solid var(--gray-100);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--teal-900);
+    padding: 40px 24px;
+    text-align: center;
+    margin-top: 64px;
+  }
+  .footer-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 20px;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .footer-sub {
+    font-size: 13px;
+    color: var(--teal-200);
+    opacity: 0.8;
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 48px 20px 40px; }
+    .hero-stats { gap: 24px; }
+    .intro-block { padding: 24px 20px; }
+    .detail-box { padding: 20px; }
+    .day-row { grid-template-columns: 1fr; gap: 4px; }
+    .day-label { color: var(--teal-700); font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <p class="hero-eyebrow">DMin · The Master's Seminary · Dr. Nathan LeMaster</p>
+  <h1 class="hero-title">Línguas Bíblicas — <em>do alfabeto à exegese</em></h1>
+  <p class="hero-sub">Curso intensivo de pré-requisito em hebraico e grego bíblico. 1 hora por dia. 12 semanas.</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">12</div>
+      <div class="stat-label">Semanas</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">1h</div>
+      <div class="stat-label">Por dia</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Fases</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Línguas</div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="intro-block">
+    <p>Este curso foi estruturado para o pré-requisito de línguas do programa DMin do The Master's Seminary, conforme determinado pelo Dr. Nathan LeMaster (PhD, Cambridge). LeMaster é especialista em <strong>hebraico bíblico, semântica cognitiva e exegese do Antigo Testamento</strong> — e seu método exige que o aluno não apenas reconheça formas gramaticais, mas compreenda como o escritor bíblico organizou o significado.</p>
+    <p>A prioridade é o <strong>hebraico</strong> (Fases 1 e 2), com introdução ao <strong>grego</strong> na Fase 2. A Fase 3 integra as duas línguas em um paper exegético no padrão TMS. Clique em qualquer semana para ver o plano diário detalhado.</p>
+  </div>
+</div>
+
+<!-- ═══════════════ FASE 1 ═══════════════ -->
+<section class="phase-section phase-1">
+  <div class="phase-header">
+    <span class="phase-badge">Fase 1</span>
+    <h2 class="phase-title">Fundação morfológica — hebraico</h2>
+  </div>
+  <p class="phase-desc">Semanas 1–4 · Foco total em hebraico bíblico. Objetivo: ler e analisar formas verbais básicas sem léxico de apoio.</p>
+
+  <div class="weeks-grid">
+    <div class="week-card" onclick="toggle('s1', this)">
+      <p class="week-num">Semana 1</p>
+      <p class="week-name">Sistema consonantal</p>
+      <p class="week-lang">Hebraico</p>
+    </div>
+    <div class="week-card" onclick="toggle('s2', this)">
+      <p class="week-num">Semana 2</p>
+      <p class="week-name">Vogais e sistema silábico</p>
+      <p class="week-lang">Hebraico</p>
+    </div>
+    <div class="week-card" onclick="toggle('s3', this)">
+      <p class="week-num">Semana 3</p>
+      <p class="week-name">Sistema nominal e artigo</p>
+      <p class="week-lang">Hebraico</p>
+    </div>
+    <div class="week-card" onclick="toggle('s4', this)">
+      <p class="week-num">Semana 4</p>
+      <p class="week-name">Qal perfeito e imperfeito</p>
+      <p class="week-lang">Hebraico</p>
+    </div>
+  </div>
+
+  <div id="s1" class="detail-box">
+    <p class="detail-title">Semana 1 — Sistema consonantal e leitura fluente</p>
+    <div class="day-row"><span class="day-label">Seg / Qua</span><span class="day-content">Revise as 22 consoantes com pronúncia sefardita moderna (padrão acadêmico). Use flashcards Anki — deck "Biblical Hebrew Vocabulary" de Lyle Story. <em>30 min pronúncia + 30 min escrita.</em></span></div>
+    <div class="day-row"><span class="day-label">Ter / Qui</span><span class="day-content">Daghesh forte vs. lene. Guturais (א ה ח ע) — regras de comportamento com vogais. <em>Garner, Biblical Hebrew, cap. 1–2.</em></span></div>
+    <div class="day-row"><span class="day-label">Sex</span><span class="day-content">Leitura em voz alta do Salmo 23 em hebraico — sem traduzir, só reconhecer consoantes. Marque o que não reconhece.</span></div>
+    <div class="day-row"><span class="day-label">Sáb / Dom</span><span class="day-content">Revisão Anki + escrita das consoantes de memória. Meta: zero erro nas 22.</span></div>
+    <div class="resources">
+      <span class="resource-pill">Anki — Biblical Hebrew deck</span>
+      <span class="resource-pill">Garner, Biblical Hebrew (Hendrickson)</span>
+      <span class="resource-pill">Mechon-Mamre.org — texto hebraico</span>
+    </div>
+  </div>
+
+  <div id="s2" class="detail-box">
+    <p class="detail-title">Semana 2 — Vogais e sistema silábico</p>
+    <div class="day-row"><span class="day-label">Seg / Qua</span><span class="day-content">As 5 vogais longas e 5 curtas. Qamets vs. Qamets-Chatuph — a distinção que engana iniciantes. <em>Exercícios: identificar vogal em 30 palavras do Gênesis 1.</em></span></div>
+    <div class="day-row"><span class="day-label">Ter / Qui</span><span class="day-content">Regra da sílaba aberta vs. fechada. Shewa vocal vs. quiescente. <em>Garner, cap. 3–4.</em></span></div>
+    <div class="day-row"><span class="day-label">Sex</span><span class="day-content">Leitura de Gênesis 1:1–5 em hebraico com pontuação. Sublinhe cada vogal e nomeie-a.</span></div>
+    <div class="day-row"><span class="day-label">Sáb / Dom</span><span class="day-content">Anki + ditado: escreva 10 palavras ouvidas em hebraico (YouTube: "Biblical Hebrew pronunciation").</span></div>
+    <div class="resources">
+      <span class="resource-pill">Garner, cap. 3–4</span>
+      <span class="resource-pill">Gênesis 1 — BHS (Biblia Hebraica Stuttgartensia)</span>
+      <span class="resource-pill">Bible Hub — texto interlinear</span>
+    </div>
+  </div>
+
+  <div id="s3" class="detail-box">
+    <p class="detail-title">Semana 3 — Sistema nominal, gênero e artigo definido</p>
+    <div class="day-row"><span class="day-label">Seg / Qua</span><span class="day-content">Masculino vs. feminino: terminações ה‎- e ת‎-. Plural: ים‎- e ות‎-. <em>Memorize os 10 substantivos mais frequentes do AT (Anki).</em></span></div>
+    <div class="day-row"><span class="day-label">Ter / Qui</span><span class="day-content">Artigo definido ה e suas variações com guturais. Preposições prefixadas: ב כ ל מ. <em>Garner, cap. 5–6.</em></span></div>
+    <div class="day-row"><span class="day-label">Sex</span><span class="day-content">Análise morfológica de Deuteronômio 6:4 (o Shemá) — identifique cada forma nominal e sua função sintática.</span></div>
+    <div class="day-row"><span class="day-label">Sáb / Dom</span><span class="day-content">Anki + exercício de tradução inversa: da ARA para o hebraico de Dt 6:4–5.</span></div>
+    <div class="resources">
+      <span class="resource-pill">Garner, cap. 5–6</span>
+      <span class="resource-pill">BibleHub — Dt 6:4 interlinear</span>
+      <span class="resource-pill">HALOT — acesso via Logos</span>
+    </div>
+  </div>
+
+  <div id="s4" class="detail-box">
+    <p class="detail-title">Semana 4 — Sistema verbal: Qal perfeito e imperfeito</p>
+    <div class="day-row"><span class="day-label">Seg / Qua</span><span class="day-content">Qal Perfeito: paradigma completo de קטל com todos os sufixos pessoais. Memorize como sequência rítmica. <em>Garner, cap. 14.</em></span></div>
+    <div class="day-row"><span class="day-label">Ter / Qui</span><span class="day-content">Qal Imperfeito: prefixos e sufixos. Waw consecutivo — o dispositivo mais importante da narrativa hebraica. <em>Garner, cap. 15.</em></span></div>
+    <div class="day-row"><span class="day-label">Sex</span><span class="day-content">Análise verbal de Gênesis 1:1–3: identifique cada verbo, raiz, binyan, tempo, pessoa, número, gênero.</span></div>
+    <div class="day-row"><span class="day-label">Sáb / Dom</span><span class="day-content">Anki verbal + leitura do Salmo 23 completo com análise de cada forma verbal.</span></div>
+    <div class="resources">
+      <span class="resource-pill">Garner, cap. 14–15</span>
+      <span class="resource-pill">Paradigm Master Pro (app)</span>
+      <span class="resource-pill">Logos Bible Software — análise morfológica</span>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ═══════════════ FASE 2 ═══════════════ -->
+<section class="phase-section phase-2">
+  <div class="phase-header">
+    <span class="phase-badge">Fase 2</span>
+    <h2 class="phase-title">Exegese e semântica aplicada</h2>
+  </div>
+  <p class="phase-desc">Semanas 5–9 · Hebraico avançado + introdução ao grego. Objetivo: análise lexical e semântica no nível que LeMaster exige.</p>
+
+  <div class="weeks-grid">
+    <div class="week-card" onclick="toggle('s5', this)">
+      <p class="week-num">Semana 5</p>
+      <p class="week-name">Binyanim (stems verbais)</p>
+      <p class="week-lang">Hebraico</p>
+    </div>
+    <div class="week-card" onclick="toggle('s6', this)">
+      <p class="week-num">Semana 6</p>
+      <p class="week-name">Análise lexical e HALOT</p>
+      <p class="week-lang">Hebraico</p>
+    </div>
+    <div class="week-card" onclick="toggle('s7', this)">
+      <p class="week-num">Semana 7</p>
+      <p class="week-name">Domínio semântico e polissemia</p>
+      <p class="week-lang">Hebraico + Teoria</p>
+    </div>
+    <div class="week-card" onclick="toggle('s8', this)">
+      <p class="week-num">Semana 8</p>
+      <p class="week-name">Grego: sistema nominal</p>
+      <p class="week-lang">Grego</p>
+    </div>
+    <div class="week-card" onclick="toggle('s9', this)">
+      <p class="week-num">Semana 9</p>
+      <p class="week-name">Grego: sistema verbal básico</p>
+      <p class="week-lang">Grego</p>
+    </div>
+  </div>
+
+  <div id="s5" class="detail-box">
+    <p class="detail-title">Semana 5 — Os sete binyanim (stems verbais)</p>
+    <div class="day-row"><span class="day-label">Seg / Qua</span><span class="day-content">Qal, Niphal, Piel/Pual: função semântica de cada um. O Piel não é simplesmente "intensivo" — revise Carson, Exegetical Fallacies, cap. sobre erros lexicais. <em>Garner, cap. 16–18.</em></span></div>
+    <div class="day-row"><span class="day-label">Ter / Qui</span><span class="day-content">Hiphil/Hophal (causativo) e Hithpael (reflexivo). Paradigmas com a raiz שמר (guardar).</span></div>
+    <div class="day-row"><span class="day-label">Sex</span><span class="day-content">Análise dos verbos de Salmo 119:1–8: identifique binyan e função semântica de cada um.</span></div>
+    <div class="day-row"><span class="day-label">Sáb / Dom</span><span class="day-content">Leia LeMaster, "Janus Parallelism" (TMSJ vol. 31, nº 2 — gratuito em tms.edu) e observe como ele rastreia semântica verbal no texto hebraico.</span></div>
+    <div class="resources">
+      <span class="resource-pill">Carson, Exegetical Fallacies (Baker, 1984)</span>
+      <span class="resource-pill">LeMaster, TMSJ vol. 31 nº 2 (tms.edu)</span>
+    </div>
+  </div>
+
+  <div id="s6" class="detail-box">
+    <p class="detail-title">Semana 6 — Análise lexical com HALOT e BDB</p>
+    <div class="day-row"><span class="day-label">Seg / Qua</span><span class="day-content">Como usar o HALOT: estrutura de entrada, raiz trilítera, cognatos semíticos, usos por binyan. Diferença metodológica entre HALOT e BDB.</span></div>
+    <div class="day-row"><span class="day-label">Ter / Qui</span><span class="day-content">Análise lexical completa de יָרֵא (temer/reverenciar) — o termo central na dissertação de LeMaster. Mapeie todos os usos no livro de Jó.</span></div>
+    <div class="day-row"><span class="day-label">Sex</span><span class="day-content">Escreva uma análise lexical de 1 página sobre יָרֵא em Jó 1:1 seguindo o método de LeMaster: raiz → binyan → domínio semântico → função no contexto.</span></div>
+    <div class="day-row"><span class="day-label">Sáb / Dom</span><span class="day-content">Leia o abstract da dissertação de LeMaster (Cambridge Repository, gratuito em repository.cam.ac.uk). Identifique o método que ele usa.</span></div>
+    <div class="resources">
+      <span class="resource-pill">HALOT (Logos ou BibleWorks)</span>
+      <span class="resource-pill">LeMaster PhD — repository.cam.ac.uk</span>
+      <span class="resource-pill">BDB — gratuito em BibleHub</span>
+    </div>
+  </div>
+
+  <div id="s7" class="detail-box">
+    <p class="detail-title">Semana 7 — Teoria do protótipo, polissemia e domínio semântico</p>
+    <div class="day-row"><span class="day-label">Seg / Qua</span><span class="day-content">O que é protótipo semântico: o significado central de uma palavra e suas extensões periféricas. Exemplo: חֶסֶד (hesed) tem protótipo de lealdade contratual, com extensões para amor, misericórdia, bondade.</span></div>
+    <div class="day-row"><span class="day-label">Ter / Qui</span><span class="day-content">Polissemia vs. homonímia: como distinguir. Metáfora e metonímia como mecanismos de extensão semântica. <em>Leia LeMaster, "Lexical Meaning in Biblical Hebrew" (ResearchGate, gratuito).</em></span></div>
+    <div class="day-row"><span class="day-label">Sex</span><span class="day-content">Mapeie o domínio semântico do medo em hebraico: liste todos os termos, identifique o protótipo e as extensões. Use יָרֵא, פַּחַד, חָרַד como ponto de partida.</span></div>
+    <div class="day-row"><span class="day-label">Sáb / Dom</span><span class="day-content">Escreva 1 página: "Qual a diferença entre יָרֵא e פַּחַד em Jó?" Use HALOT e o método de LeMaster.</span></div>
+    <div class="resources">
+      <span class="resource-pill">LeMaster, ResearchGate — Lexical Meaning</span>
+      <span class="resource-pill">Louw & Nida, Greek-English Lexicon (método de domínio semântico)</span>
+    </div>
+  </div>
+
+  <div id="s8" class="detail-box">
+    <p class="detail-title">Semana 8 — Grego: sistema nominal e artigo</p>
+    <div class="day-row"><span class="day-label">Seg / Qua</span><span class="day-content">Alfabeto grego com pronúncia erasmiana (padrão acadêmico). As 5 vogais e ditongos. <em>Mounce, Basics of Biblical Greek, cap. 1–4.</em></span></div>
+    <div class="day-row"><span class="day-label">Ter / Qui</span><span class="day-content">Declinações 1ª e 2ª (feminino e masculino/neutro). Artigo definido: todos os casos e gêneros. <em>Mounce, cap. 5–7.</em></span></div>
+    <div class="day-row"><span class="day-label">Sex</span><span class="day-content">Análise nominal de João 1:1 — identifique cada forma nominal, caso, gênero, número. Atenção especial: ὁ λόγος vs. θεὸς (com e sem artigo).</span></div>
+    <div class="day-row"><span class="day-label">Sáb / Dom</span><span class="day-content">Anki — deck Mounce Greek + leitura de Romanos 1:1–7 com interlinear.</span></div>
+    <div class="resources">
+      <span class="resource-pill">Mounce, Basics of Biblical Greek (Zondervan)</span>
+      <span class="resource-pill">Anki — Mounce Greek Vocab deck</span>
+      <span class="resource-pill">Logos — João 1 interlinear</span>
+    </div>
+  </div>
+
+  <div id="s9" class="detail-box">
+    <p class="detail-title">Semana 9 — Grego: sistema verbal presente e aoristo</p>
+    <div class="day-row"><span class="day-label">Seg / Qua</span><span class="day-content">Presente indicativo ativo: paradigma de λύω. Aspecto verbal em grego — imperfectivo (presente) vs. perfectivo (aoristo). <em>Mounce, cap. 15–16.</em></span></div>
+    <div class="day-row"><span class="day-label">Ter / Qui</span><span class="day-content">Aoristo indicativo ativo: primeiro e segundo aoristo. A diferença aspectual com o presente. <em>Mounce, cap. 22.</em></span></div>
+    <div class="day-row"><span class="day-label">Sex</span><span class="day-content">Análise verbal de Romanos 1:1–7: identifique cada verbo, tempo, aspecto, voz, modo. LeMaster leciona Exegese de Romanos — esse texto é território dele.</span></div>
+    <div class="day-row"><span class="day-label">Sáb / Dom</span><span class="day-content">Anki + leitura de Romanos 8:1 em grego sem ajuda. Traduza e compare com ARA.</span></div>
+    <div class="resources">
+      <span class="resource-pill">Mounce, cap. 15–16, 22</span>
+      <span class="resource-pill">Bible Hub — Rm 1 interlinear grego</span>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ═══════════════ FASE 3 ═══════════════ -->
+<section class="phase-section phase-3">
+  <div class="phase-header">
+    <span class="phase-badge">Fase 3</span>
+    <h2 class="phase-title">Exegese integrada e preparação para avaliação</h2>
+  </div>
+  <p class="phase-desc">Semanas 10–12 · Integração hebraico + grego + semântica. Objetivo: produzir uma análise exegética no padrão TMS.</p>
+
+  <div class="weeks-grid">
+    <div class="week-card" onclick="toggle('s10', this)">
+      <p class="week-num">Semana 10</p>
+      <p class="week-name">Crítica textual básica</p>
+      <p class="week-lang">Hebraico + Grego</p>
+    </div>
+    <div class="week-card" onclick="toggle('s11', this)">
+      <p class="week-num">Semana 11</p>
+      <p class="week-name">Análise sintática e diagrama</p>
+      <p class="week-lang">Hebraico</p>
+    </div>
+    <div class="week-card" onclick="toggle('s12', this)">
+      <p class="week-num">Semana 12</p>
+      <p class="week-name">Paper exegético completo</p>
+      <p class="week-lang">Avaliação final</p>
+    </div>
+  </div>
+
+  <div id="s10" class="detail-box">
+    <p class="detail-title">Semana 10 — Crítica textual: BHS e aparato crítico</p>
+    <div class="day-row"><span class="day-label">Seg / Qua</span><span class="day-content">Como ler o aparato crítico da BHS: siglas, manuscritos (LXX, DSS, Peshitta), como pesar variantes. <em>Tov, Textual Criticism of the Hebrew Bible (Fortress), introdução.</em></span></div>
+    <div class="day-row"><span class="day-label">Ter / Qui</span><span class="day-content">Analise uma variante textual em Jó 1:1 — compare MT com LXX. Qual leitura é preferível e por quê?</span></div>
+    <div class="day-row"><span class="day-label">Sex</span><span class="day-content">Mesma operação em Romanos 1:1 no aparato crítico grego (NA28). Identifique a variante mais significativa.</span></div>
+    <div class="day-row"><span class="day-label">Sáb / Dom</span><span class="day-content">Escreva 1 parágrafo justificando sua escolha textual em cada passagem com argumentação técnica.</span></div>
+    <div class="resources">
+      <span class="resource-pill">Tov, Textual Criticism (Fortress, 2001)</span>
+      <span class="resource-pill">BHS + NA28 — Logos ou Bible Gateway</span>
+    </div>
+  </div>
+
+  <div id="s11" class="detail-box">
+    <p class="detail-title">Semana 11 — Análise sintática e diagrama de cláusulas</p>
+    <div class="day-row"><span class="day-label">Seg / Qua</span><span class="day-content">Método de diagramação do TMS: hierarquia de cláusulas, relações de subordinação, waw consecutivo como marcador de sequência narrativa. <em>Syllabi do OT603 — disponível em Scribd.</em></span></div>
+    <div class="day-row"><span class="day-label">Ter / Qui</span><span class="day-content">Diagrame Deuteronômio 6:4–9 em hebraico: identifique a estrutura de cláusulas principais e subordinadas.</span></div>
+    <div class="day-row"><span class="day-label">Sex</span><span class="day-content">Diagrame Romanos 1:1–7 em grego: a frase mais longa de Romanos — uma única sentença de sete versículos.</span></div>
+    <div class="day-row"><span class="day-label">Sáb / Dom</span><span class="day-content">Revise os diagramas com Bible Arc (bibliarc.com) ou Logos Sentence Diagramming. Corrija a hierarquia.</span></div>
+    <div class="resources">
+      <span class="resource-pill">BibleArc.com — diagramação online gratuita</span>
+      <span class="resource-pill">Logos — Sentence Diagramming</span>
+    </div>
+  </div>
+
+  <div id="s12" class="detail-box">
+    <p class="detail-title">Semana 12 — Paper exegético no padrão TMS</p>
+    <div class="day-row"><span class="day-label">Seg / Qua</span><span class="day-content">Escolha uma perícope hebraica de 5–8 versículos. Estruture o paper: (1) crítica textual, (2) análise morfológica, (3) diagrama sintático, (4) análise lexical com HALOT, (5) contexto literário, (6) aplicação teológica.</span></div>
+    <div class="day-row"><span class="day-label">Ter / Qui</span><span class="day-content">Escreva as seções 1–3. Seja técnico e preciso — cite HALOT, BHS, e fontes secundárias no formato Chicago/Turabian.</span></div>
+    <div class="day-row"><span class="day-label">Sex</span><span class="day-content">Escreva as seções 4–6. A seção 4 (análise lexical) deve usar o método de domínio semântico de LeMaster: protótipo → extensões → polissemia.</span></div>
+    <div class="day-row"><span class="day-label">Sáb / Dom</span><span class="day-content">Revisão final. Esse documento pode ser usado como portfólio no contato inicial com Dr. LeMaster.</span></div>
+    <div class="resources">
+      <span class="resource-pill">Turabian, Manual for Writers, 8ª ed.</span>
+      <span class="resource-pill">Kaiser, Toward an Exegetical Theology (Baker)</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-title">Línguas Bíblicas — Pré-requisito DMin TMS</p>
+  <p class="footer-sub">Preparado para o pré-requisito com Dr. Nathan LeMaster · The Master's Seminary</p>
+</footer>
+
+<script>
+  let activeCard = null;
+
+  function toggle(id, card) {
+    const box = document.getElementById(id);
+    const isOpen = box.classList.contains('visible');
+
+    document.querySelectorAll('.detail-box').forEach(el => el.classList.remove('visible'));
+    document.querySelectorAll('.week-card').forEach(el => el.classList.remove('active'));
+
+    if (!isOpen) {
+      box.classList.add('visible');
+      card.classList.add('active');
+      setTimeout(() => box.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+    }
+  }
+</script>
+</body>
+</html>
